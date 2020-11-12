@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+
+$font: "Roboto", sans-serif;
+$color-fiord: #394263; // sidenav bg & dark text
+$color-white: #fff; // card bg
+$color-athens-gray: #eaedf1; // content bg
+$color-catskill-white: #f9fafc; // top nav bg
+$color-abbey: #777; // gray text
+$color-mischka: #dadae3; // light gray for menu icon
+$color-java: #1bbae1; // blue text
+$color-mine-shaft: #333; // main section header bg
+$color-zest: #e67e22; // document icon bg
+$color-jungle-green: #27ae60; // calendar icon bg
+$color-cinnabar: #e74c3c; // main icon bg, red
+$color-amethyst: #af64cc; // main photo icon bg
+$color-transparent: rgba(255, 255, 255, 0.5);
+$color-alto: #d3d3d3;
+
+$height-header: 90px;
+$height-footer: 50px;
+$width-sidenav: 240px;
+
+// Resets
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $font;
+}
