@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "tech-challenge"
+    }
+  },
+  "defaultProject": "tech-challenge",
+  "cli": {
+    "analytics": false
+  }
 }
