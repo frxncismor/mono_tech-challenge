@@ -1,7 +1,12 @@
 <div class="grid">
   <header class="header">
     <h1>Home</h1>
-    <i class="fas fa-bars header__menu" (click)="setMenuClick()"></i>
+    <figure class="fas fa-bars header__menu" (click)="setMenuClick()">
+      <img
+        src="https://img.icons8.com/fluent-systems-filled/96/000000/menu.png"
+        alt="menu button"
+      />
+    </figure>
   </header>
 
   <aside class="sidenav">
@@ -11,10 +16,15 @@
         src="https://static.wixstatic.com/media/0913f0_301c4cb65dac40d1b7358064bfef5a1e~mv2.png/v1/crop/x_206,y_165,w_553,h_212/fill/w_360,h_138,al_c,q_85,usm_0.66_1.00_0.01/Monoban_edited.webp"
         alt="mono ban.co"
       />
-      <i
+      <figure
         class="fas fa-times sidenav__brand-close"
         (click)="setSidenavClose()"
-      ></i>
+      >
+        <img
+          src="https://img.icons8.com/fluent-systems-filled/96/ffffff/close-window.png"
+          alt="close button"
+        />
+      </figure>
     </div>
     <div class="sidenav__profile">
       <div class="sidenav__profile-avatar"></div>
@@ -28,18 +38,18 @@
       <div class="overviewCard">
         <div class="overviewCard-description">
           <h3 class="overviewCard-title text-light">Available</h3>
-          <p class="overviewCard-subtitle">
-            {{ balance.available[0].amount | currency }}
-            <strong>{{ balance.available[0].currency }}</strong>
+          <p class="overviewCard-subtitle" *ngIf="availableBalance">
+            {{ availableBalance.amount | currency }}
+            <strong>{{ availableBalance.currency }}</strong>
           </p>
         </div>
       </div>
       <div class="overviewCard">
         <div class="overviewCard-description">
           <h3 class="overviewCard-title text-light">Pending</h3>
-          <p class="overviewCard-subtitle">
-            {{ balance.pending[0].amount | currency }}
-            <strong>{{ balance.available[0].currency }}</strong>
+          <p class="overviewCard-subtitle" *ngIf="pendingBalance">
+            {{ pendingBalance.amount | currency }}
+            <strong>{{ pendingBalance.currency }}</strong>
           </p>
         </div>
       </div>
@@ -50,35 +60,85 @@
         <div class="card__header">
           <div class="card__header-title text-light">Your Transactions</div>
         </div>
-        <div class="card__main"></div>
+        <div class="card__main">
+          <div class="zero-items" *ngIf="balanceTransactions.length === 0">
+            <div>Seems like you don't have transactions</div>
+            <img
+              src="../../../../../assets/images/sad-ghost.png"
+              alt="sad ghost"
+            />
+          </div>
+          <div class="transactions" *ngIf="balanceTransactions">
+            <div
+              class="transaction"
+              *ngFor="let transaction of balanceTransactions"
+            >
+              <div class="transaction-description">
+                <h3 class="transaction-title text-light">
+                  {{ transaction.id }}
+                </h3>
+                <p class="transaction-subtitle">
+                  {{ transaction.amount }}
+                </p>
+              </div>
+              <div class="transaction-business">
+                <p>
+                  <strong>Business name:</strong>
+                  {{ transaction.net }}
+                </p>
+                <p>
+                  <strong>Business email:</strong>
+                  {{ transaction.available_on }}
+                </p>
+                <p>
+                  <strong>Business Tax ID:</strong>
+                  {{ transaction.created }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="card">
         <div class="card__header">
           <div class="card__header-title text-light">Leads</div>
+          <button class="card__header--button" (click)="addLead()">
+            <img
+              src="https://img.icons8.com/fluent-systems-filled/48/ffffff/add-user-male.png"
+              alt="add lead"
+            />
+          </button>
         </div>
         <div class="card__main">
-          <div class="customers">
-            <div class="customer" *ngFor="let customer of customers.data">
+          <div class="zero-items" *ngIf="leads.length === 0">
+            <div>Seems like you don't have leads</div>
+            <img
+              src="../../../../../assets/images/sad-ghost.png"
+              alt="sad ghost"
+            />
+          </div>
+          <div class="customers" *ngIf="leads">
+            <div class="customer" *ngFor="let lead of leads">
               <div class="customer-description">
                 <h3 class="customer-title text-light">
-                  {{ customer.name }}
+                  {{ lead.name }}
                 </h3>
                 <p class="customer-subtitle">
-                  {{ customer.email }}
+                  {{ lead.email }}
                 </p>
               </div>
               <div class="customer-business">
                 <p>
                   <strong>Business name:</strong>
-                  {{ customer.invoice_settings.custom_fields[0].value }}
+                  {{ lead.businessEmail }}
                 </p>
                 <p>
                   <strong>Business email:</strong>
-                  {{ customer.invoice_settings.custom_fields[1].value }}
+                  {{ lead.businessName }}
                 </p>
                 <p>
                   <strong>Business Tax ID:</strong>
-                  {{ customer.invoice_settings.custom_fields[2].value }}
+                  {{ lead.businessTaxID }}
                 </p>
               </div>
             </div>
@@ -86,8 +146,16 @@
         </div>
       </div>
     </div>
-    <!-- /.main-cards -->
   </main>
 
-  <footer class="footer"></footer>
+  <footer class="footer">
+    <p>
+      Developed with love by
+      <a
+        class="footer__signature"
+        href="https://www.linkedin.com/in/frxncismor/"
+        >@frxncismor</a
+      >
+    </p>
+  </footer>
 </div>

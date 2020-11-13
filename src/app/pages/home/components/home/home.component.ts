@@ -1,17 +1,22 @@
 import { DataService } from './../../../../core/services/data/data.service';
 import { Component, OnInit } from '@angular/core';
+import { Lead } from 'src/app/utils/interfaces/customer';
+import { BalanceContent } from 'src/app/utils/interfaces/balance';
+import { BalanceTransaction } from 'src/app/utils/interfaces/balanceTransactions';
 
 @Component({
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  sidenavEl = document.querySelector('.sidenav');
-  gridEl = document.querySelector('.grid');
+  sidenavEl: any;
+  gridEl: any;
   SIDENAV_ACTIVE_CLASS = 'sidenav--active';
   GRID_NO_SCROLL_CLASS = 'grid--noscroll';
-  balance: any;
-  customers: any;
+  availableBalance: BalanceContent;
+  pendingBalance: BalanceContent;
+  leads: Lead[] = [];
+  balanceTransactions: BalanceTransaction[] = [];
 
   constructor(private dataService: DataService) {}
 
@@ -19,40 +24,45 @@ export class HomeComponent implements OnInit {
     this.getAccountBalance();
     this.getBalanceTransactions();
     // this.createCustomer();
-    this.getCustomer();
+    this.getCustomers();
     this.setMenuClick();
     this.setSidenavClose();
   }
 
   toggleClass(el, className): void {
-    if (el.hasClass(className)) {
-      el.removeClass(className);
+    if (el.classList.contains(className)) {
+      el.classList.remove(className);
     } else {
-      el.addClass(className);
+      el.classList.add(className);
     }
   }
 
   setMenuClick(): void {
-    console.log('clicked menu icon');
+    this.sidenavEl = document.querySelector('.sidenav');
+    this.gridEl = document.querySelector('.grid');
     this.toggleClass(this.sidenavEl, this.SIDENAV_ACTIVE_CLASS);
     this.toggleClass(this.gridEl, this.GRID_NO_SCROLL_CLASS);
   }
 
   setSidenavClose(): void {
+    this.sidenavEl = document.querySelector('.sidenav');
+    this.gridEl = document.querySelector('.grid');
     this.toggleClass(this.sidenavEl, this.SIDENAV_ACTIVE_CLASS);
     this.toggleClass(this.gridEl, this.GRID_NO_SCROLL_CLASS);
   }
 
   getAccountBalance(): void {
-    this.dataService.getAccountBalances().subscribe((resp) => {
-      this.balance = resp;
-      console.log(resp);
+    this.dataService.getBalanceAvailable().subscribe((resp) => {
+      this.availableBalance = resp[0];
+    });
+    this.dataService.getBalancePending().subscribe((resp) => {
+      this.pendingBalance = resp[0];
     });
   }
 
   getBalanceTransactions(): void {
     this.dataService.getBalanceTransactions().subscribe((resp) => {
-      console.log(resp);
+      this.balanceTransactions = resp;
     });
   }
 
@@ -69,15 +79,15 @@ export class HomeComponent implements OnInit {
       .subscribe((resp) => {
         console.log(resp);
       });
-    this.dataService.getCustomer().subscribe((resp) => {
-      console.log(resp);
+  }
+
+  getCustomers(): void {
+    this.dataService.getCustomers().subscribe((resp) => {
+      this.leads = resp;
     });
   }
 
-  getCustomer(): void {
-    this.dataService.getCustomer().subscribe((resp) => {
-      this.customers = resp;
-      console.log(resp);
-    });
+  addLead(): void {
+    console.log('addLead');
   }
 }
