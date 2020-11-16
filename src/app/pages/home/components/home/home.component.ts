@@ -78,7 +78,74 @@ export class HomeComponent implements OnInit {
 
   getBalanceTransactions(): void {
     this.dataService.getBalanceTransactions().subscribe((resp) => {
-      this.balanceTransactions = resp;
+      this.balanceTransactions = [
+        {
+          id: 'txn_1Hnx7gBHWpkjRuwwCD9Y1XTM',
+          amount: 100,
+          net: 100,
+          available_on: 1605492436,
+          created: 1605492436,
+          currency: 'mxn',
+          description: 'My First Test Charge (created for API docs)',
+          status: 'available',
+          type: 'charge',
+        },
+        {
+          id: 'txn_1Hnx7gBHWpkjRuwwCD9Y1XTM',
+          amount: 100,
+          net: 100,
+          available_on: 1605492436,
+          created: 1605492436,
+          currency: 'mxn',
+          description: 'My First Test Charge (created for API docs)',
+          status: 'available',
+          type: 'charge',
+        },
+        {
+          id: 'txn_1Hnx7gBHWpkjRuwwCD9Y1XTM',
+          amount: 100,
+          net: 100,
+          available_on: 1605492436,
+          created: 1605492436,
+          currency: 'mxn',
+          description: 'My First Test Charge (created for API docs)',
+          status: 'available',
+          type: 'charge',
+        },
+        {
+          id: 'txn_1Hnx7gBHWpkjRuwwCD9Y1XTM',
+          amount: 100,
+          net: 100,
+          available_on: 1605492436,
+          created: 1605492436,
+          currency: 'mxn',
+          description: 'My First Test Charge (created for API docs)',
+          status: 'available',
+          type: 'charge',
+        },
+        {
+          id: 'txn_1Hnx7gBHWpkjRuwwCD9Y1XTM',
+          amount: 100,
+          net: 100,
+          available_on: 1605492436,
+          created: 1605492436,
+          currency: 'mxn',
+          description: 'My First Test Charge (created for API docs)',
+          status: 'available',
+          type: 'charge',
+        },
+        {
+          id: 'txn_1Hnx7gBHWpkjRuwwCD9Y1XTM',
+          amount: 100,
+          net: 100,
+          available_on: 1605492436,
+          created: 1605492436,
+          currency: 'mxn',
+          description: 'My First Test Charge (created for API docs)',
+          status: 'available',
+          type: 'charge',
+        },
+      ];
     });
   }
 
@@ -155,5 +222,20 @@ export class HomeComponent implements OnInit {
 
   get taxIDField(): any {
     return this.form.get('taxID');
+  }
+
+  accordionDropDown(element): void {
+    const accordion = document.getElementsByClassName('transaction');
+    console.log(element);
+    const accEl = accordion[element];
+    accEl.classList.toggle('accordion--active');
+    console.log(accEl);
+    const panel = accEl.querySelector('.transaction-business') as HTMLElement;
+    console.log(panel);
+    if (panel.style.display === 'block') {
+      panel.style.display = 'none';
+    } else {
+      panel.style.display = 'block';
+    }
   }
 }

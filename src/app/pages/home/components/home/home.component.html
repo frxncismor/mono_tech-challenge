@@ -70,30 +70,43 @@
           </div>
           <div class="transactions" *ngIf="balanceTransactions">
             <div
+              *ngFor="let transaction of balanceTransactions; index as i"
               class="transaction"
-              *ngFor="let transaction of balanceTransactions"
+              (click)="accordionDropDown(i)"
             >
               <div class="transaction-description">
                 <h3 class="transaction-title text-light">
-                  {{ transaction.id }}
+                  {{ transaction.amount | currency }}
+                  <strong>{{ transaction.currency }}</strong>
                 </h3>
                 <p class="transaction-subtitle">
-                  {{ transaction.amount }}
+                  {{ transaction.description }}
                 </p>
               </div>
               <div class="transaction-business">
                 <p>
-                  <strong>Business name:</strong>
-                  {{ transaction.net }}
+                  <strong>Status:</strong>
+                  {{ transaction.status }}
                 </p>
                 <p>
-                  <strong>Business email:</strong>
-                  {{ transaction.available_on }}
+                  <strong>Net:</strong>
+                  {{ transaction.net | currency }}
                 </p>
                 <p>
-                  <strong>Business Tax ID:</strong>
-                  {{ transaction.created }}
+                  <strong>Type:</strong>
+                  {{ transaction.type }}
                 </p>
+                <div class="transaction__more-info">
+                  <p>
+                    <strong>Available on:</strong>
+                    {{ transaction.available_on | date: "short" }}
+                  </p>
+                  <p>
+                    <strong>Created on:</strong>
+                    {{ transaction.created | date: "short" }}
+                  </p>
+                  <p><strong>ID:</strong> {{ transaction.id }}</p>
+                </div>
               </div>
             </div>
           </div>

@@ -178,6 +178,39 @@ a {
   margin: 20px;
 }
 
+.overviewCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  background-color: $color-white;
+  transform: translateY(0);
+  transition: all 0.3s;
+
+  &-description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &-title {
+    font-size: 18px;
+    color: $color-java;
+    margin: 0;
+  }
+
+  &-subtitle {
+    margin: 2px;
+    color: $color-abbey;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+}
+
 .zero-items {
   min-height: 300px;
   max-height: 600px;
@@ -196,6 +229,8 @@ a {
 
 .transaction {
   @extend .overviewCard;
+  justify-content: center;
+  flex-direction: column;
   &-description {
     display: flex;
     flex-direction: column;
@@ -211,6 +246,20 @@ a {
   &-subtitle {
     margin: 2px;
     color: $color-abbey;
+  }
+  &-business {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+  }
+  &.accordion--active {
+    background-color: $color-fiord;
+    .transaction-subtitle {
+      color: $color-white;
+    }
   }
 }
 
@@ -235,50 +284,6 @@ a {
   &-subtitle {
     margin: 2px;
     color: $color-abbey;
-  }
-}
-
-.overviewCard {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px;
-  background-color: $color-white;
-  transform: translateY(0);
-  transition: all 0.3s;
-
-  &-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 60px;
-    width: 60px;
-    border-radius: 50%;
-    font-size: 21px;
-    color: #fff;
-  }
-
-  &-description {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  &-title {
-    font-size: 18px;
-    color: $color-java;
-    margin: 0;
-  }
-
-  &-subtitle {
-    margin: 2px;
-    color: $color-abbey;
-  }
-
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
   }
 }
 
