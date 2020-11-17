@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
   sidenavEl: any;
   modal: any;
   SIDENAV_ACTIVE_CLASS = 'sidenav--active';
-  MODAL_FULL = 'modal-window--fullwidth';
   availableBalance: BalanceContent;
   pendingBalance: BalanceContent;
   leads: Lead[] = [];
@@ -41,32 +40,17 @@ export class HomeComponent implements OnInit {
     this.buildForm();
     this.getAccountBalance();
     this.getBalanceTransactions();
-    // this.createCustomer();
-    this.getCustomers();
-    this.setMenuClick();
-    this.setSidenavClose();
+    this.getLeads();
+    this.setSidenavToggle();
   }
 
-  toggleClass(el, className): void {
-    if (el.classList.contains(className)) {
-      el.classList.remove(className);
-    } else {
-      el.classList.add(className);
-    }
-  }
-
-  setMenuClick(): void {
+  // Toggle the class 'sidenav--active' to open or close the sidenav
+  setSidenavToggle(): void {
     this.sidenavEl = document.querySelector('.sidenav');
-    this.toggleClass(this.sidenavEl, this.SIDENAV_ACTIVE_CLASS);
+    this.sidenavEl.classList.toggle(this.SIDENAV_ACTIVE_CLASS);
   }
 
-  setSidenavClose(): void {
-    this.sidenavEl = document.querySelector('.sidenav');
-    this.modal = document.querySelector('.modal-window');
-    this.toggleClass(this.sidenavEl, this.SIDENAV_ACTIVE_CLASS);
-    // this.toggleClass(this.modal, this.MODAL_FULL);
-  }
-
+  // Get the account balance data
   getAccountBalance(): void {
     this.dataService.getBalanceAvailable().subscribe((resp) => {
       this.availableBalance = resp[0];
@@ -76,8 +60,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  // Get the  balanceTransactions data
   getBalanceTransactions(): void {
     this.dataService.getBalanceTransactions().subscribe((resp) => {
+      // Mock data response
       this.balanceTransactions = [
         {
           id: 'txn_1Hnx7gBHWpkjRuwwCD9Y1XTM',
@@ -149,30 +135,32 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getCustomers(): void {
-    this.dataService.getCustomers().subscribe((resp) => {
+  // Get the leads data
+  getLeads(): void {
+    this.dataService.getLeads().subscribe((resp) => {
       this.leads = resp;
     });
   }
 
+  // Open the modal window to fill the form
   addLead(): void {
     const modal = document.querySelector('.modal-window');
     modal.classList.add('modal-open');
   }
 
+  // Close the modal window without data
   closeLead(): void {
-    console.log('close');
     const modal = document.querySelector('.modal-window');
     modal.classList.remove('modal-open');
   }
 
+  // Send the data to create a new lead
   registerLead(event: Event): void {
     event.preventDefault();
     if (this.form.valid) {
       const lead = this.form.value;
-      console.log(lead);
       this.dataService
-        .createCustomer(
+        .createLead(
           lead.name,
           lead.lastname,
           lead.email,
@@ -182,13 +170,14 @@ export class HomeComponent implements OnInit {
         )
         .subscribe((resp) => {
           console.log(resp);
-          this.getCustomers();
+          this.getLeads();
         });
       this.form.reset();
       this.closeLead();
     }
   }
 
+  // build the reactive form with validators
   private buildForm(): void {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -200,6 +189,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  // Getters to shortcut the values of the form
   get nameField(): any {
     return this.form.get('name');
   }
@@ -224,6 +214,7 @@ export class HomeComponent implements OnInit {
     return this.form.get('taxID');
   }
 
+  // Functionality of the accordion
   accordionDropDown(element): void {
     const accordion = document.getElementsByClassName('transaction');
     console.log(element);

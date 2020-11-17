@@ -29,14 +29,14 @@ a {
 .grid {
   position: relative;
   display: grid;
-  grid-template-columns: 100%; // Charts responsiveness won't work with fr units
+  grid-template-columns: 100%;
   grid-template-rows: $height-header 1fr $height-footer;
   grid-template-areas:
     "header"
     "main"
     "footer";
   height: 100vh;
-  overflow-x: hidden; // Prevent overflow scroll from hidden sidenav
+  overflow-x: hidden;
 }
 
 .header {
@@ -51,7 +51,7 @@ a {
   }
 
   &__menu {
-    position: fixed; // Needs to stay visible for all mobile scrolling
+    position: fixed;
     padding: 13px;
     right: 10px;
     background-color: $color-mischka;
@@ -92,17 +92,17 @@ a {
 }
 
 .sidenav {
-  position: fixed; // Access sidenav at any scroll position; relatively positioned on medium + screens
+  position: fixed;
   grid-area: sidenav;
   height: 100%;
   overflow-y: auto;
   background-color: $color-fiord;
   color: $color-white;
-  width: $width-sidenav; // Will match grid area on medium + screens
+  width: $width-sidenav;
   transform: translateX(-245px);
   transition: all 0.6s ease-in-out;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
-  z-index: 2; // Needs to sit above the hamburger menu icon
+  z-index: 2;
 
   &__brand {
     position: relative;
@@ -151,7 +151,6 @@ a {
   }
 }
 
-// Dashboard content wrapper
 .main {
   grid-area: main;
   background-color: $color-athens-gray;
@@ -169,7 +168,6 @@ a {
   }
 }
 
-// Overview quicklink cards container
 .main-overview {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
@@ -463,7 +461,7 @@ a {
   // Break out to sidenav grid layout on medium + screens
   .grid {
     display: grid;
-    grid-template-columns: $width-sidenav calc(100% - 240px); // Charts responsiveness won't work with fr units
+    grid-template-columns: $width-sidenav calc(100% - 240px);
     grid-template-rows: $height-header 1fr $height-footer;
     grid-template-areas:
       "sidenav header"
