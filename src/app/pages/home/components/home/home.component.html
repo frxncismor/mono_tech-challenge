@@ -1,25 +1,23 @@
 <div class="grid">
+  <!-- Header section -->
   <header class="header">
     <h1>Home</h1>
-    <figure class="fas fa-bars header__menu" (click)="setMenuClick()">
+    <figure class="header__menu" (click)="setMenuClick()">
       <img
         src="https://img.icons8.com/fluent-systems-filled/96/000000/menu.png"
         alt="menu button"
       />
     </figure>
   </header>
-
+  <!-- Sidenav section -->
   <aside class="sidenav">
     <div class="sidenav__brand">
-      <i class="fas fa-feather-alt sidenav__brand-icon"></i>
+      <i class="sidenav__brand-icon"></i>
       <img
         src="https://static.wixstatic.com/media/0913f0_301c4cb65dac40d1b7358064bfef5a1e~mv2.png/v1/crop/x_206,y_165,w_553,h_212/fill/w_360,h_138,al_c,q_85,usm_0.66_1.00_0.01/Monoban_edited.webp"
         alt="mono ban.co"
       />
-      <figure
-        class="fas fa-times sidenav__brand-close"
-        (click)="setSidenavClose()"
-      >
+      <figure class="sidenav__brand-close" (click)="setSidenavClose()">
         <img
           src="https://img.icons8.com/fluent-systems-filled/96/ffffff/close-window.png"
           alt="close button"
@@ -31,9 +29,10 @@
       <div class="sidenav__profile-title text-light">Hugo M</div>
     </div>
   </aside>
-
+  <!-- Main section -->
   <main class="main">
     <h2 class="main__title">Balance</h2>
+    <!-- Main overview -->
     <div class="main-overview">
       <div class="overviewCard">
         <div class="overviewCard-description">
@@ -54,7 +53,7 @@
         </div>
       </div>
     </div>
-    <!-- /.main__overview -->
+    <!-- Main cards -->
     <div class="main__cards">
       <div class="card">
         <div class="card__header">
@@ -147,7 +146,7 @@
       </div>
     </div>
   </main>
-
+  <!-- Footer section -->
   <footer class="footer">
     <p>
       Developed with love by
