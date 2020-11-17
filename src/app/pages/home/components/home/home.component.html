@@ -69,30 +69,43 @@
           </div>
           <div class="transactions" *ngIf="balanceTransactions">
             <div
+              *ngFor="let transaction of balanceTransactions; index as i"
               class="transaction"
-              *ngFor="let transaction of balanceTransactions"
+              (click)="accordionDropDown(i)"
             >
               <div class="transaction-description">
                 <h3 class="transaction-title text-light">
-                  {{ transaction.id }}
+                  {{ transaction.amount | currency }}
+                  <strong>{{ transaction.currency }}</strong>
                 </h3>
                 <p class="transaction-subtitle">
-                  {{ transaction.amount }}
+                  {{ transaction.description }}
                 </p>
               </div>
               <div class="transaction-business">
                 <p>
-                  <strong>Business name:</strong>
-                  {{ transaction.net }}
+                  <strong>Status:</strong>
+                  {{ transaction.status }}
                 </p>
                 <p>
-                  <strong>Business email:</strong>
-                  {{ transaction.available_on }}
+                  <strong>Net:</strong>
+                  {{ transaction.net | currency }}
                 </p>
                 <p>
-                  <strong>Business Tax ID:</strong>
-                  {{ transaction.created }}
+                  <strong>Type:</strong>
+                  {{ transaction.type }}
                 </p>
+                <div class="transaction__more-info">
+                  <p>
+                    <strong>Available on:</strong>
+                    {{ transaction.available_on | date: "short" }}
+                  </p>
+                  <p>
+                    <strong>Created on:</strong>
+                    {{ transaction.created | date: "short" }}
+                  </p>
+                  <p><strong>ID:</strong> {{ transaction.id }}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -142,6 +155,142 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-window">
+      <div>
+        <a (click)="closeLead()" class="modal-close">Close</a>
+        <h1>Add your lead</h1>
+        <div>
+          <form (ngSubmit)="registerLead($event)" [formGroup]="form">
+            <div class="add__form--group">
+              <label class="form__label" for="name">Name</label> <br />
+              <input
+                id="name"
+                formControlName="name"
+                class="form__input"
+                type="text"
+                name="name"
+              />
+              <div
+                class="form__error"
+                *ngIf="nameField.errors && nameField.dirty"
+              >
+                <div *ngIf="nameField.hasError('required')">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+            <div class="add__form--group">
+              <label for="lastname" class="form__label">Lastname</label> <br />
+              <input
+                type="text"
+                id="lastname"
+                formControlName="lastname"
+                class="form__input"
+                name="lastname"
+              />
+              <div
+                class="form__error"
+                *ngIf="lastnameField.errors && lastnameField.dirty"
+              >
+                <div *ngIf="lastnameField.hasError('required')">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+            <div class="add__form--group">
+              <label for="email" class="form__label">Email</label> <br />
+              <input
+                type="text"
+                id="email"
+                formControlName="email"
+                class="form__input"
+                name="email"
+              />
+              <div
+                class="form__error"
+                *ngIf="emailField.errors && emailField.dirty"
+              >
+                <div *ngIf="emailField.hasError('required')">
+                  El campo es requerido
+                </div>
+                <div *ngIf="emailField.hasError('email')">
+                  Ingrese un email valido
+                </div>
+              </div>
+            </div>
+            <div class="add__form--group">
+              <label for="businessEmail" class="form__label"
+                >Business email</label
+              >
+              <br />
+              <input
+                type="text"
+                id="businessEmail"
+                formControlName="businessEmail"
+                class="form__input"
+                name="businessEmail"
+              />
+              <div
+                class="form__error"
+                *ngIf="businessEmailField.errors && businessEmailField.dirty"
+              >
+                <div *ngIf="businessEmailField.hasError('required')">
+                  El campo es requerido
+                </div>
+                <div *ngIf="businessEmailField.hasError('email')">
+                  Ingrese un email valido
+                </div>
+              </div>
+            </div>
+            <div class="add__form--group">
+              <label for="businessName" class="form__label"
+                >Business name</label
+              >
+              <br />
+              <input
+                type="text"
+                id="businessName"
+                formControlName="businessName"
+                class="form__input"
+                name="businessName"
+              />
+              <div
+                class="form__error"
+                *ngIf="businessNameField.errors && businessNameField.dirty"
+              >
+                <div *ngIf="businessNameField.hasError('required')">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+            <div class="add__form--group">
+              <label for="taxID" class="form__label">Business Tax ID</label>
+              <br />
+              <input
+                type="number"
+                id="taxID"
+                formControlName="taxID"
+                class="form__input"
+                name="taxID"
+              />
+              <div
+                class="form__error"
+                *ngIf="taxIDField.errors && taxIDField.dirty"
+              >
+                <div *ngIf="taxIDField.hasError('required')">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+            <div class="add__form--submit">
+              <button class="form__button" [disabled]="form.invalid">
+                Add
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

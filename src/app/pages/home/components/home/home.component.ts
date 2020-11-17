@@ -3,6 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { Lead } from 'src/app/utils/interfaces/customer';
 import { BalanceContent } from 'src/app/utils/interfaces/balance';
 import { BalanceTransaction } from 'src/app/utils/interfaces/balanceTransactions';
+import {
+  FormControl,
+  FormGroup,
+  FormBuilder,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   templateUrl: './home.component.html',
@@ -10,17 +16,29 @@ import { BalanceTransaction } from 'src/app/utils/interfaces/balanceTransactions
 })
 export class HomeComponent implements OnInit {
   sidenavEl: any;
-  gridEl: any;
+  modal: any;
   SIDENAV_ACTIVE_CLASS = 'sidenav--active';
-  GRID_NO_SCROLL_CLASS = 'grid--noscroll';
+  MODAL_FULL = 'modal-window--fullwidth';
   availableBalance: BalanceContent;
   pendingBalance: BalanceContent;
   leads: Lead[] = [];
   balanceTransactions: BalanceTransaction[] = [];
+  form: FormGroup = new FormGroup({
+    name: new FormControl(),
+    lastname: new FormControl(),
+    email: new FormControl(),
+    businessEmail: new FormControl(),
+    businessName: new FormControl(),
+    taxID: new FormControl(),
+  });
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
+    this.buildForm();
     this.getAccountBalance();
     this.getBalanceTransactions();
     // this.createCustomer();
@@ -39,16 +57,14 @@ export class HomeComponent implements OnInit {
 
   setMenuClick(): void {
     this.sidenavEl = document.querySelector('.sidenav');
-    this.gridEl = document.querySelector('.grid');
     this.toggleClass(this.sidenavEl, this.SIDENAV_ACTIVE_CLASS);
-    this.toggleClass(this.gridEl, this.GRID_NO_SCROLL_CLASS);
   }
 
   setSidenavClose(): void {
     this.sidenavEl = document.querySelector('.sidenav');
-    this.gridEl = document.querySelector('.grid');
+    this.modal = document.querySelector('.modal-window');
     this.toggleClass(this.sidenavEl, this.SIDENAV_ACTIVE_CLASS);
-    this.toggleClass(this.gridEl, this.GRID_NO_SCROLL_CLASS);
+    // this.toggleClass(this.modal, this.MODAL_FULL);
   }
 
   getAccountBalance(): void {
@@ -62,23 +78,75 @@ export class HomeComponent implements OnInit {
 
   getBalanceTransactions(): void {
     this.dataService.getBalanceTransactions().subscribe((resp) => {
-      this.balanceTransactions = resp;
+      this.balanceTransactions = [
+        {
+          id: 'txn_1Hnx7gBHWpkjRuwwCD9Y1XTM',
+          amount: 100,
+          net: 100,
+          available_on: 1605492436,
+          created: 1605492436,
+          currency: 'mxn',
+          description: 'My First Test Charge (created for API docs)',
+          status: 'available',
+          type: 'charge',
+        },
+        {
+          id: 'txn_1Hnx7gBHWpkjRuwwCD9Y1XTM',
+          amount: 100,
+          net: 100,
+          available_on: 1605492436,
+          created: 1605492436,
+          currency: 'mxn',
+          description: 'My First Test Charge (created for API docs)',
+          status: 'available',
+          type: 'charge',
+        },
+        {
+          id: 'txn_1Hnx7gBHWpkjRuwwCD9Y1XTM',
+          amount: 100,
+          net: 100,
+          available_on: 1605492436,
+          created: 1605492436,
+          currency: 'mxn',
+          description: 'My First Test Charge (created for API docs)',
+          status: 'available',
+          type: 'charge',
+        },
+        {
+          id: 'txn_1Hnx7gBHWpkjRuwwCD9Y1XTM',
+          amount: 100,
+          net: 100,
+          available_on: 1605492436,
+          created: 1605492436,
+          currency: 'mxn',
+          description: 'My First Test Charge (created for API docs)',
+          status: 'available',
+          type: 'charge',
+        },
+        {
+          id: 'txn_1Hnx7gBHWpkjRuwwCD9Y1XTM',
+          amount: 100,
+          net: 100,
+          available_on: 1605492436,
+          created: 1605492436,
+          currency: 'mxn',
+          description: 'My First Test Charge (created for API docs)',
+          status: 'available',
+          type: 'charge',
+        },
+        {
+          id: 'txn_1Hnx7gBHWpkjRuwwCD9Y1XTM',
+          amount: 100,
+          net: 100,
+          available_on: 1605492436,
+          created: 1605492436,
+          currency: 'mxn',
+          description: 'My First Test Charge (created for API docs)',
+          status: 'available',
+          type: 'charge',
+        },
+      ];
     });
-  }
-
-  createCustomer(): void {
-    this.dataService
-      .createCustomer(
-        'Juan',
-        'Martinez',
-        'juan@gmail.com',
-        'Juan@tech.org',
-        'JuanTech',
-        '123456789'
-      )
-      .subscribe((resp) => {
-        console.log(resp);
-      });
   }
 
   getCustomers(): void {
@@ -88,6 +156,86 @@ export class HomeComponent implements OnInit {
   }
 
   addLead(): void {
-    console.log('addLead');
+    const modal = document.querySelector('.modal-window');
+    modal.classList.add('modal-open');
+  }
+
+  closeLead(): void {
+    console.log('close');
+    const modal = document.querySelector('.modal-window');
+    modal.classList.remove('modal-open');
+  }
+
+  registerLead(event: Event): void {
+    event.preventDefault();
+    if (this.form.valid) {
+      const lead = this.form.value;
+      console.log(lead);
+      this.dataService
+        .createCustomer(
+          lead.name,
+          lead.lastname,
+          lead.email,
+          lead.businessEmail,
+          lead.businessName,
+          lead.taxID
+        )
+        .subscribe((resp) => {
+          console.log(resp);
+          this.getCustomers();
+        });
+      this.form.reset();
+      this.closeLead();
+    }
+  }
+
+  private buildForm(): void {
+    this.form = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      lastname: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      businessEmail: ['', [Validators.required, Validators.email]],
+      businessName: ['', [Validators.required]],
+      taxID: ['', [Validators.required]],
+    });
+  }
+
+  get nameField(): any {
+    return this.form.get('name');
+  }
+
+  get lastnameField(): any {
+    return this.form.get('lastname');
+  }
+
+  get emailField(): any {
+    return this.form.get('email');
+  }
+
+  get businessEmailField(): any {
+    return this.form.get('businessEmail');
+  }
+
+  get businessNameField(): any {
+    return this.form.get('businessName');
+  }
+
+  get taxIDField(): any {
+    return this.form.get('taxID');
+  }
+
+  accordionDropDown(element): void {
+    const accordion = document.getElementsByClassName('transaction');
+    console.log(element);
+    const accEl = accordion[element];
+    accEl.classList.toggle('accordion--active');
+    console.log(accEl);
+    const panel = accEl.querySelector('.transaction-business') as HTMLElement;
+    console.log(panel);
+    if (panel.style.display === 'block') {
+      panel.style.display = 'none';
+    } else {
+      panel.style.display = 'block';
+    }
   }
 }
