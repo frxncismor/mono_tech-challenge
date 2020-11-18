@@ -4,6 +4,7 @@ Deploy: [Here is the deploy](https://mono-tech-challenge.vercel.app/)
 1. [Introduction](#introduction)
 2. [Technologies](#technologies)
 3. [Screenshots](#screenshots)
+4. [Documentation](#documentation)
 
 ## Introduction
 Using the Stripe API create a home screen of the user with at least:
@@ -28,4 +29,7 @@ Using the Stripe API create a home screen of the user with at least:
 ![image](https://user-images.githubusercontent.com/30633617/99212375-81b79c80-2790-11eb-998e-b0a8cf4a6e7c.png)
 ![image](https://user-images.githubusercontent.com/30633617/99212460-b592c200-2790-11eb-9d58-84d1cc9b7df9.png)
 ![image](https://user-images.githubusercontent.com/30633617/99212568-f985c700-2790-11eb-868b-6c0c3f335aa7.png)
+
+## Documentation
+You can read the documentation [here](https://www.notion.so/Monoban-co-Tech-Challenge-762dd3ae1c7346bebd9ddde5044efa5c)
 
