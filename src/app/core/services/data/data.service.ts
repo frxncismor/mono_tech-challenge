@@ -103,12 +103,12 @@ export class DataService {
    * @method map : is used to return the response like the interface that we set it (with its properties)
    */
   createLead(
-    name,
-    lastname,
-    personalEmail,
-    businessEmail,
-    businessLegalName,
-    taxID
+    name: string,
+    lastname: string,
+    personalEmail: string,
+    businessEmail: string,
+    businessLegalName: string,
+    taxID: number
   ): any {
     const body = {
       name: `${name} ${lastname}`,
