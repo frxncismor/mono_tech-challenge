@@ -179,7 +179,7 @@ a {
 .overviewCard {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding: 12px;
   background-color: $color-white;
   transform: translateY(0);
@@ -271,6 +271,7 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 50%;
   }
 
   &-title {
@@ -282,6 +283,9 @@ a {
   &-subtitle {
     margin: 2px;
     color: $color-abbey;
+  }
+  &-business {
+    width: 50%;
   }
 }
 
@@ -325,7 +329,6 @@ a {
 
   &__main {
     position: relative;
-    padding-right: 20px;
     background-color: $color-white;
   }
 }
@@ -408,9 +411,9 @@ a {
       &--submit {
         width: 100%;
         display: flex;
-        justify-content: end;
+        justify-content: left;
         .form__button {
-          width: 50%;
+          width: 82%;
           height: 35px;
           color: $color-white;
           background-color: $color-fiord;

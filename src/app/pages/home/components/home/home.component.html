@@ -172,13 +172,14 @@
                 class="form__input"
                 type="text"
                 name="name"
+                placeholder="Write your name here"
               />
               <div
                 class="form__error"
                 *ngIf="nameField.errors && nameField.dirty"
               >
                 <div *ngIf="nameField.hasError('required')">
-                  El campo es requerido
+                  This field is required
                 </div>
               </div>
             </div>
@@ -190,40 +191,45 @@
                 formControlName="lastname"
                 class="form__input"
                 name="lastname"
+                placeholder="Write your last name here"
               />
               <div
                 class="form__error"
                 *ngIf="lastnameField.errors && lastnameField.dirty"
               >
                 <div *ngIf="lastnameField.hasError('required')">
-                  El campo es requerido
+                  This field is required
                 </div>
               </div>
             </div>
             <div class="add__form--group">
-              <label for="email" class="form__label">Email</label> <br />
+              <label for="email" class="form__label"
+                >Contact personal email</label
+              >
+              <br />
               <input
                 type="text"
                 id="email"
                 formControlName="email"
                 class="form__input"
                 name="email"
+                placeholder="Write your personal email here"
               />
               <div
                 class="form__error"
                 *ngIf="emailField.errors && emailField.dirty"
               >
                 <div *ngIf="emailField.hasError('required')">
-                  El campo es requerido
+                  This field is required
                 </div>
                 <div *ngIf="emailField.hasError('email')">
-                  Ingrese un email valido
+                  Enter a valid email
                 </div>
               </div>
             </div>
             <div class="add__form--group">
               <label for="businessEmail" class="form__label"
-                >Business email</label
+                >Contact business email</label
               >
               <br />
               <input
@@ -232,22 +238,23 @@
                 formControlName="businessEmail"
                 class="form__input"
                 name="businessEmail"
+                placeholder="Write your business email here"
               />
               <div
                 class="form__error"
                 *ngIf="businessEmailField.errors && businessEmailField.dirty"
               >
                 <div *ngIf="businessEmailField.hasError('required')">
-                  El campo es requerido
+                  This field is required
                 </div>
                 <div *ngIf="businessEmailField.hasError('email')">
-                  Ingrese un email valido
+                  Enter a valid email
                 </div>
               </div>
             </div>
             <div class="add__form--group">
               <label for="businessName" class="form__label"
-                >Business name</label
+                >Business legal name</label
               >
               <br />
               <input
@@ -256,18 +263,21 @@
                 formControlName="businessName"
                 class="form__input"
                 name="businessName"
+                placeholder="Write your business name here"
               />
               <div
                 class="form__error"
                 *ngIf="businessNameField.errors && businessNameField.dirty"
               >
                 <div *ngIf="businessNameField.hasError('required')">
-                  El campo es requerido
+                  This field is required
                 </div>
               </div>
             </div>
             <div class="add__form--group">
-              <label for="taxID" class="form__label">Business Tax ID</label>
+              <label for="taxID" class="form__label"
+                >Business tax identification number</label
+              >
               <br />
               <input
                 type="number"
@@ -275,13 +285,14 @@
                 formControlName="taxID"
                 class="form__input"
                 name="taxID"
+                placeholder="Write your business tax id number here"
               />
               <div
                 class="form__error"
                 *ngIf="taxIDField.errors && taxIDField.dirty"
               >
                 <div *ngIf="taxIDField.hasError('required')">
-                  El campo es requerido
+                  This field is required
                 </div>
               </div>
             </div>
