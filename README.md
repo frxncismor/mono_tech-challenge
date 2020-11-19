@@ -30,7 +30,7 @@ Using the Stripe API create a home screen of the user with at least:
 - Karma, Jasmine and Protractor for testing
 
 ## Screenshots
-![Functionality of the app](https://gph.is/g/aKdKGD9)
+![Functionality of the app](https://media.giphy.com/media/ostA1PNCxw5LIGoXFf/giphy.gif)
 
 ## Documentation
 You can read the documentation [here](https://www.notion.so/Monoban-co-Tech-Challenge-762dd3ae1c7346bebd9ddde5044efa5c)
