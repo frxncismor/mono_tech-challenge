@@ -4,6 +4,7 @@
 - Language: Angular 10
 - Topic: MonoBanco App
 - Github: https://github.com/frxncismor/mono_tech-challenge
+- Developed and tested on: Google Chrome
 
 Deploy: [Here is the deploy](https://mono-tech-challenge.vercel.app/)
 ## Table of Contents
