@@ -8,7 +8,7 @@ Deploy: [Here is the deploy](https://mono-tech-challenge.vercel.app/)
 4. [Documentation](#documentation)
 
 ## Introduction
-On this app you will be able to consult your balances, consult your transactions, consult and add your leads.
+On this app you will be able to consult your balances, consult your transactions, consult and add your leads connected to the Stripe API.
 
 ## Requirements
 Using the Stripe API create a home screen of the user with at least:
