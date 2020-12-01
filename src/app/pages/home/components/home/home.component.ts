@@ -53,85 +53,16 @@ export class HomeComponent implements OnInit {
   // Get the account balance data
   getAccountBalance(): void {
     this.dataService.getBalanceAvailable().subscribe((resp) => {
-      this.availableBalance = resp[0];
-    });
-    this.dataService.getBalancePending().subscribe((resp) => {
-      this.pendingBalance = resp[0];
+      console.log({ resp });
+      this.availableBalance = resp.available[0];
+      this.pendingBalance = resp.pending[0];
     });
   }
 
   // Get the  balanceTransactions data
   getBalanceTransactions(): void {
     this.dataService.getBalanceTransactions().subscribe((resp) => {
-      // Mock data response
-      this.balanceTransactions = [
-        {
-          id: 'txn_1Hnx7gBHWpkjRuwwCD9Y1XTM',
-          amount: 100,
-          net: 100,
-          available_on: 1605492436,
-          created: 1605492436,
-          currency: 'mxn',
-          description: 'My First Test Charge (created for API docs)',
-          status: 'available',
-          type: 'charge',
-        },
-        {
-          id: 'txn_1Hnx7gBHWpkjRuwwCD9Y1XTM',
-          amount: 100,
-          net: 100,
-          available_on: 1605492436,
-          created: 1605492436,
-          currency: 'mxn',
-          description: 'My First Test Charge (created for API docs)',
-          status: 'available',
-          type: 'charge',
-        },
-        {
-          id: 'txn_1Hnx7gBHWpkjRuwwCD9Y1XTM',
-          amount: 100,
-          net: 100,
-          available_on: 1605492436,
-          created: 1605492436,
-          currency: 'mxn',
-          description: 'My First Test Charge (created for API docs)',
-          status: 'available',
-          type: 'charge',
-        },
-        {
-          id: 'txn_1Hnx7gBHWpkjRuwwCD9Y1XTM',
-          amount: 100,
-          net: 100,
-          available_on: 1605492436,
-          created: 1605492436,
-          currency: 'mxn',
-          description: 'My First Test Charge (created for API docs)',
-          status: 'available',
-          type: 'charge',
-        },
-        {
-          id: 'txn_1Hnx7gBHWpkjRuwwCD9Y1XTM',
-          amount: 100,
-          net: 100,
-          available_on: 1605492436,
-          created: 1605492436,
-          currency: 'mxn',
-          description: 'My First Test Charge (created for API docs)',
-          status: 'available',
-          type: 'charge',
-        },
-        {
-          id: 'txn_1Hnx7gBHWpkjRuwwCD9Y1XTM',
-          amount: 100,
-          net: 100,
-          available_on: 1605492436,
-          created: 1605492436,
-          currency: 'mxn',
-          description: 'My First Test Charge (created for API docs)',
-          status: 'available',
-          type: 'charge',
-        },
-      ];
+      this.balanceTransactions = resp;
     });
   }
 

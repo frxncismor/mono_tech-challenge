@@ -20,19 +20,37 @@ export class DataService {
    * @method retry : is used to retry the request the number of times that we set it
    * @method map : is used to return the response like the interface that we set it (with its properties)
    */
-  getBalanceAvailable(): Observable<BalanceContent[]> {
+  getBalanceAvailable(): Observable<Balance> {
     return this.http.get(`${this.api}/v1/balance`).pipe(
       retry(3),
       catchError(HandleHttpResponseError),
       map((response: any) => {
+        console.log(response);
         const balanceAvailable: BalanceContent[] = [];
+        const balancePending: BalanceContent[] = [];
+
         response.available.forEach((resp: any) => {
           balanceAvailable.push({
             amount: resp.amount,
             currency: resp.currency,
           });
         });
-        return balanceAvailable;
+
+        response.pending.forEach((resp: any) => {
+          balancePending.push({
+            amount: resp.amount,
+            currency: resp.currency,
+          });
+        });
+        console.log({ balancePending });
+        console.log({ balanceAvailable });
+
+        const balances: Balance = {
+          available: balanceAvailable,
+          pending: balancePending,
+        };
+
+        return balances;
       })
     );
   }
