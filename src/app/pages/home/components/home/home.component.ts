@@ -53,7 +53,6 @@ export class HomeComponent implements OnInit {
   // Get the account balance data
   getAccountBalance(): void {
     this.dataService.getBalanceAvailable().subscribe((resp) => {
-      console.log({ resp });
       this.availableBalance = resp.available[0];
       this.pendingBalance = resp.pending[0];
     });
@@ -100,7 +99,6 @@ export class HomeComponent implements OnInit {
           lead.taxID
         )
         .subscribe((resp) => {
-          console.log(resp);
           this.getLeads();
         });
       this.form.reset();
@@ -148,12 +146,9 @@ export class HomeComponent implements OnInit {
   // Functionality of the accordion
   accordionDropDown(element): void {
     const accordion = document.getElementsByClassName('transaction');
-    console.log(element);
     const accEl = accordion[element];
     accEl.classList.toggle('accordion--active');
-    console.log(accEl);
     const panel = accEl.querySelector('.transaction-business') as HTMLElement;
-    console.log(panel);
     if (panel.style.display === 'block') {
       panel.style.display = 'none';
     } else {
