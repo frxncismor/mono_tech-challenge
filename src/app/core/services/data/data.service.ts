@@ -42,6 +42,7 @@ export class DataService {
             currency: resp.currency,
           });
         });
+
         console.log({ balancePending });
         console.log({ balanceAvailable });
 
